@@ -1,35 +1,16 @@
-import { PrismaClient } from '@prisma/client';
+import { PrismaClient } from "prisma/prisma-client";
 
 const prisma = new PrismaClient();
 
-async function main() {
-  await prisma.feedback.createMany({
+const main = async () => {
+  const feedback = await prisma.feedback.createMany({
     data: [
-      {
-        message: 'Lovely app',
-        feedbackType: 'FEEDBACK',
-        email: 'mahmoud@prisma.io',
-        name: 'Mahmoud',
-      },
-      {
-        message: 'Add dark mode',
-        feedbackType: 'IDEA',
-        email: 'dan@prisma.io',
-        name: 'Dan',
-      },
-      {
-        message: 'layout is broken on mobile',
-        feedbackType: 'ISSUE',
-        email: 'alex@prisma.io',
-        name: 'Alex',
-      },
+      { name: "some-1", email: "first@first", feedbackType: "IDEA", message: "1 msg" },
+      { name: "some-2", email: "sec@sec", feedbackType: "FEEDBACK", message: "2 msg" },
     ],
   });
-}
+};
 
 main()
-  .catch((e) => {
-    console.error(e);
-    process.exit(1);
-  })
-  .finally(async () => await prisma.$disconnect);
+  .catch(err=>console.log(err))
+  .finally(async()=>await prisma.$disconnect)

@@ -11,17 +11,17 @@ generator client {
 }
 
 model Feedback {
-  id           String       @id @default(uuid())
+  id           String       @id @default(cuid())
   createdAt    DateTime     @default(now())
   updatedAt    DateTime     @updatedAt
-  feedbackType FeedbackType
-  message      String
+  name         String?
   email        String
-  name         String
+  message      String
+  feedbackType FeedbackType @default(IDEA)
 }
 
 enum FeedbackType {
+  FEEDBACK
   ISSUE
   IDEA
-  FEEDBACK
 }
