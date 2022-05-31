@@ -1,7 +1,8 @@
 import { prisma } from 'lib/prisma';
+import {Feedback} from 'prisma/prisma-client'
 
 export default async function handler(req, res) {
-  const { feedbackType, message, email, name } = req.body;
+  const { feedbackType, message, email, name } = req.body as Feedback;
 
   try {
     const feedback = await prisma.feedback.create({
